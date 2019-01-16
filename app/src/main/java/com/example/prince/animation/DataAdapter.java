@@ -30,7 +30,7 @@ public class DataAdapter  extends RecyclerView.Adapter<DataAdapter.ViewHolder> i
         return new ViewHolder(binding);
     }
 
-    @BindingAdapter({"imageUrl"})
+    @BindingAdapter({"bind:imageUrl"})
     public static void loadImage(ImageView view, String imageUrl) {
         if(!imageUrl.equals("")){
             Picasso.get().load(imageUrl).into(view);

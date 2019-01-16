@@ -20,7 +20,7 @@
             android:layout_height="150dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            bind:imageUrl="@{pictures.src.medium}"/>
+            bind:imageUrl="@{pictures.src.medium}" />
 
         <TextView
             android:id="@+id/photographer"

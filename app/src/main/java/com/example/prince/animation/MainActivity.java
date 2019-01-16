@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -17,7 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    Animation fadeInAnime;
     RecyclerView rv;
     DataAdapter dataAdapter;
     CompositeDisposable mCompositeDisposable;
@@ -25,17 +27,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        if (LeakCanary.isInAnalyzerProcess(this)) {
-//            // This process is dedicated to LeakCanary for heap analysis.
-//            // You should not init your app in this process.
-//            return;
-//        }
-//        LeakCanary.install(this.getApplication());
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
+        LeakCanary.install(this.getApplication());
         setContentView(R.layout.activity_main);
+        fadeInAnime = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.blink);
 
         mCompositeDisposable = new CompositeDisposable();
         initRecyclerView();
         loadJSON();
+        rv.startAnimation(fadeInAnime);
     }
 
     private void initRecyclerView() {
@@ -61,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
     private void handleResponse(DataClass dataClass) {
         dataAdapter = new DataAdapter(dataClass.getPhotos());
         rv.setAdapter(dataAdapter);
-
     }
 
     private void handleError(Throwable throwable) {
