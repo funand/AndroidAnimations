@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--step 1-->
+<layout xmlns:bind="http://schemas.android.com/tools">
+<!--step 2-->
+    <data>
+        <!--step 3 -->
+<variable
+    name="pictures"
+    type="com.example.prince.animation.Photo" />
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/root_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img_dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            bind:imageUrl="@{pictures.src.medium}"/>
+
+        <TextView
+            android:id="@+id/photographer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/img_dp"
+            android:paddingLeft="10dp"
+            android:text="@{pictures.photographer}"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/img_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/photographer"
+            android:layout_toRightOf="@+id/img_dp"
+            android:paddingLeft="10dp"
+            android:text="@{pictures.id}"
+            android:textSize="10sp" />
+
+    </RelativeLayout>
+
+</layout>
